@@ -7,6 +7,13 @@ use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\PublishedPost;
+use App\User;
+
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
 
 class Postscontroller extends Controller
 {
@@ -63,6 +70,11 @@ class Postscontroller extends Controller
         if(array_key_exists('tags',$datas)){
             $newpost->tags()->sync($datas['tags']);
         }
+
+        // sending email
+        $mail=new PublishedPost();
+        $email_utente=Auth::user()->email;
+        Mail::to($email_utente)->send($mail);
         return redirect()->route('admin.posts.index');
     }
 
