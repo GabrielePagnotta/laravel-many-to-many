@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Postscontroller extends Controller
 {
@@ -41,11 +42,18 @@ class Postscontroller extends Controller
     {
         $datas=$request->all();
 
+
         $request->validate([
             'title'=>'required',
             'body'=>'required'
         ]);
+
         $newpost= new Post();
+
+        if(array_key_exists('image', $datas)){
+            $cover_url= Storage::put('post_covers',$datas['image']);
+            $datas['cover']=$cover_url;
+        }
         $newpost->fill($datas);
         // $newpost->title=$datas['title'];
         // $newpost->body=$datas['body'];

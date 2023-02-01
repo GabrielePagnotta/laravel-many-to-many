@@ -5,7 +5,7 @@
         <h1>crea un post</h1>
     </div>
 
-    <form class="container" action="{{route('admin.posts.store')}}" method="POST">
+    <form class="container" action="{{route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <label>
@@ -40,6 +40,9 @@
             <p>è obbligatorio compilare questo campo</p>
         </div>
     @enderror
+    <div class="m-3">
+        <input type="file" name="image" class="form-control">
+    </div>
         <button class="btn btn-success my-3"type="submit">Crea</button>
     </form>
 @endsection

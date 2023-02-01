@@ -8,5 +8,8 @@
 
     <h3>descrizione</h3>
     <h1>{{$show->body}}</h1>
+
+    <h3>immagine</h3>
+    <img src="{{asset("storage/$show->cover")}}" alt="">
 </div>
 @endsection
